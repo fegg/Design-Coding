@@ -34,3 +34,25 @@ const promise3 = () => {
 
 XPromise.race([promise2(), promise3()]).then(res => console.log('race: ', res));
 XPromise.all([promise2(), promise3()]).then(res => console.log('all: ', JSON.stringify(res)));
+
+const defer1 = XPromise.defer();
+const defer2 = XPromise.defer();
+
+testDefer(defer1, () => {
+  defer1.resolve('ok');
+});
+
+testDefer(defer2, () => {
+  defer2.reject(new Error('fail'));
+})
+
+function testDefer(x, cb) {
+  x.promise.then((result) => {
+    console.log('resolve defer', result);
+  }).catch((err) => {
+    console.log('reject defer', err.message);
+  });
+
+  cb();
+}
+

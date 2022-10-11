@@ -99,6 +99,17 @@ export class XPromise {
     return this.then(null, onReject);
   }
 
+  static defer() {
+    const result = {};
+
+    result.promise = new XPromise((resolve, reject) => {
+      result.resolve = resolve;
+      result.reject = reject;
+    });
+
+    return result;
+  }
+
   static resolve(value) {
     if (utils.isXPromiseInstance(value)) {
       return value.then(x => x);
