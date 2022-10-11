@@ -28,13 +28,13 @@ export class XPromise {
     }
   }
 
-  tick(fn) {
+  executeContext(fn) {
     setTimeout(() => fn(), 0);
   }
 
   resolve(result) {
     if (this.state === XPromise.STATE.PENDING) {
-      this.tick(() => {
+      this.executeContext(() => {
         this.state = XPromise.STATE.FULFILLED;
         this.result = result;
 
@@ -45,7 +45,7 @@ export class XPromise {
 
   reject(reason) {
     if (this.state === XPromise.STATE.PENDING) {
-      this.tick(() => {
+      this.executeContext(() => {
         this.state = XPromise.STATE.REJECT;
         this.result = reason;
 
@@ -62,7 +62,7 @@ export class XPromise {
 
     return new XPromise((resolve, reject) => {
       const resolved = () => {
-        this.tick(() => {
+        this.executeContext(() => {
           try {
             const value = _onResolve(this.result);
             utils.isXPromiseInstance(value) ? value.then((res) => resolve(res)) : resolve(value);
@@ -72,7 +72,7 @@ export class XPromise {
         });
       };
       const rejected = () => {
-        this.tick(() => {
+        this.executeContext(() => {
           try {
             const value = _onReject(this.result);
             utils.isXPromiseInstance(value) ? value.then((res) => reject(res)) : reject(value);
