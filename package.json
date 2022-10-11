@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/fegg/Design-Coding/issues"
   },
-  "homepage": "https://github.com/fegg/Design-Coding#readme"
+  "homepage": "https://github.com/fegg/Design-Coding#readme",
+  "dependencies": {
+    "performance-now": "^2.1.0"
+  }
 }
