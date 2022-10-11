@@ -1,0 +1,24 @@
+{
+  "name": "design-coding",
+  "version": "1.0.0",
+  "description": "零散写点代码",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fegg/Design-Coding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fegg/Design-Coding/issues"
+  },
+  "homepage": "https://github.com/fegg/Design-Coding#readme"
+}
