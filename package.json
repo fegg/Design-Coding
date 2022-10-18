@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/fegg/Design-Coding#readme",
   "dependencies": {
+    "eventemitter2": "^6.4.9",
+    "lodash-es": "^4.17.21",
     "performance-now": "^2.1.0"
   }
 }

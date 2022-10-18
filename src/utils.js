@@ -16,5 +16,8 @@ export const utils = {
   },
   isArray(arr) {
     return Array.isArray ? Array.isArray : this.type(arr) === '[object Array]';
-  }
+  },
+  log(obj) {
+    console.log(obj);
+  },
 };
