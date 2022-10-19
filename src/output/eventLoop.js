@@ -1,5 +1,6 @@
 /**
  * node v16, 浏览器环境可能 resolve 输出有差异
+ * async function 有一定差异 https://juejin.cn/post/6844903740667854861#heading-4
  */
 // 1, 3, 5, script start, async2 start, async2 doing
 // promise constructor, script end, 4, async2 end, promise then, 2, run timeout
@@ -126,4 +127,39 @@ function test3() {
     })
   })
   console.log('2') // 宏任务一
+}
+
+function test4() {
+  setTimeout(function () {
+    console.log('6');
+  }, 0);
+
+  console.log('1');
+
+  /**
+   * async1 like to promise sugar
+   * 
+   * return new Promise(() => {
+   *  console.log(2);
+   * 
+   *  return new Promise((resolve) => {
+   *    // async2
+   *    console.log(3);
+   *  }).then(() => {
+   *    console.log(5);
+   *  });
+   * });
+   */
+  async function async1() {
+    console.log('2');
+    await async2();
+    console.log('5'); // 属于 async 包裹的微任务 callback
+  }
+
+  async function async2() {
+    console.log('3');
+  }
+
+  async1();
+  console.log('4');
 }
