@@ -49,3 +49,37 @@ function printLevel(root) {
 
    return res;
 }
+
+// 是否对称
+function isSymmetric(root) {
+    return diff(root, root);
+
+    function diff(p, q) {
+        if (p === null && q === null) {
+            return true;
+        }
+
+        if (p === null || q === null) {
+            return false;
+        }
+
+        return p.val === q.val && diff(p.left, q.right) && diff(p.right, q.left);
+    }
+}
+
+// 是否相等
+function isSameTree(p, q) {
+    if (p === null && q === null) {
+        return true;
+    }
+
+    if (p === null && q !== null) {
+        return false;
+    }
+
+    if (p !== null && q === null) {
+        return false;
+    }
+
+    return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}

@@ -1,4 +1,4 @@
-import { isArray, isString } from 'lodash-es';
+import { isString } from 'lodash-es';
 
 const CONSTANTS = {
   dot: '.',
@@ -31,14 +31,16 @@ function versionDiff(v1, v2) {
   const arrVersion1 = toFill(toArray(v1));
   const arrVersion2 = toFill(toArray(v2));
 
+  const len = arrVersion1.length;
+
   let diffCount = 0;
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < len; i++) {
     if (arrVersion1[i] > arrVersion2[i]) {
       return 1;
     } else if (arrVersion1[i] < arrVersion2[i]) {
       return -1;
-    } else if (diffCount < 3) {
+    } else if (diffCount < len) {
       diffCount++;
       continue;
     }
