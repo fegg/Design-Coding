@@ -14,20 +14,23 @@ const mockData = {
 
 const matrix = new Matrix();
 
-const r1 = matrix.printRBLT(mockData.m1);
-const r2 = matrix.printRBLT(mockData.m2);
+console.log(matrix.printCycle(mockData.m1));
+console.log(matrix.printCycle(mockData.m2));
 
-console.log(r1);
-console.log(r2);
-
-const r3 = matrix.print45TL(mockData.m1);
-const r4 = matrix.print45TL(mockData.m2);
-
-console.log(r3);
-console.log(r4);
-
-const r5 = matrix.print45TR(mockData.m1);
-const r6 = matrix.print45TR(mockData.m2);
-
-console.log(r5);
-console.log(r6);
+// const r1 = matrix.printRBLT(mockData.m1);
+// const r2 = matrix.printRBLT(mockData.m2);
+//
+// console.log(r1);
+// console.log(r2);
+//
+// const r3 = matrix.print45TL(mockData.m1);
+// const r4 = matrix.print45TL(mockData.m2);
+//
+// console.log(r3);
+// console.log(r4);
+//
+// const r5 = matrix.print45TR(mockData.m1);
+// const r6 = matrix.print45TR(mockData.m2);
+//
+// console.log(r5);
+// console.log(r6);

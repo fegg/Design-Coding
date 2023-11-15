@@ -5,7 +5,7 @@ const CONSTANTS = {
   defaultVersionNum: 0,
 };
 
-function toArray(str) { 
+function toArray(str) {
   if (!isString(str)) {
     return [];
   }
@@ -42,7 +42,6 @@ function versionDiff(v1, v2) {
       return -1;
     } else if (diffCount < len) {
       diffCount++;
-      continue;
     }
   }
 

@@ -16,52 +16,92 @@ const addRemote = async (a, b) =>
  */
 async function add(...inputs) {
   if (inputs.length <= 1) {
-    // @TODO：如果没有传入参数是否需要抛出异常 AddRemoteError
-    return Promise.resolve(inputs[0] ?? 0);
+    return Promise.resolve(inputs[0]);
   }
 
   const n = inputs.length;
   const promiseQueue = [];
 
-  for(let i = 0; i < n - 1; i += 2) {
-    const promise = addRemote(inputs[i], inputs[i+ 1]);
-    promiseQueue.push(promise);
+  if (!add.cache) {
+    add.cache = {};
   }
 
-  // 说明奇数，还需要再请求加一次
   if (n % 2 > 0) {
-    const lastNum = inputs[n - 1];
-    promiseQueue.push(Promise.resolve(lastNum));
+    const x = inputs.shift();
+    promiseQueue.push(x);
   }
 
-  return Promise.all(promiseQueue).then(result => {
-    return add(...result);
-  });
+  for(let i = 0; i * 2 < n - 1; i++) {
+    const x = inputs[i * 2];
+    const y = inputs[i * 2 + 1];
+    promiseQueue.push(getValue(x, y));
+  }
+
+  function getValue(x, y) {
+    const cacheValue = getCacheValue(x, y);
+    return cacheValue ?? addRemoteByCache(x, y);
+  }
+
+  function getCacheValue(x, y) {
+    return add.cache[`${x}${y}`] || add.cache[`${y}${x}`];
+  }
+
+  function addRemoteByCache(x, y) {
+    return addRemote(x, y).then(r => {
+      add.cache[`${x}${y}`] = r;
+      return r;
+    });
+  }
+
+  return Promise.all(promiseQueue).then(x => add(...x));
 }
 
-add().then(result => {
-  console.log('么有参数:', result);
-})
+// const start1 = now();
+// // 请用示例验证运行结果:
+// await add(1, 2).then(result => {
+//   const end1 = now();
+//   console.log('1+2=', result, end1 - start1);
+// });
+//
+// const start2 = now();
+// await add(3, 5, 2).then(result => {
+//   const end2 = now();
+//   console.log('3+5+2=', result, end2 - start2);
+// });
+//
+// const start11 = now();
+// await add(3, 5, 2, 1, 2, 21, 212, 323).then(result => {
+//   console.log('total=', result, now() - start11);
+// });
+//
+// const start12 = now();
+// await add(3, 5, 2, 1, 2, 21, 212).then(result => {
+//   console.log('total2=', result,  now() - start12);
+// });
 
-const start1 = now();
-// 请用示例验证运行结果:
-add(1, 2).then(result => {
-  const end1 = now();
-  console.log('1+2=', result, end1 - start1);
+const start13 = now();
+await add(3, 5, 2, 1, 2, 21, 2123).then(result => {
+  console.log('total3=', result, now() - start13);
 });
 
-const start2 = now();
-add(3, 5, 2).then(result => {
-  const end2 = now();
-  console.log('3+5+2=', result, end2 - start2);
-});
-
-add(3, 5, 2, 1, 2, 21, 212, 323).then(result => {
-  console.log('total=', result);
-});
-
-const start3 = now();
-add(...Array(100).fill(1)).then(result => {
-  const end3 = now();
-  console.log('100.fill(1)=', result, end3 - start3);
-});
+// const start14 = now();
+// await add(3, 5, 2, 1, 2, 21, 212).then(result => {
+//   console.log('total4=', result, now() - start14);
+// });
+//
+// add.cache = null;
+// const start15 = now();
+// await add(3, 5, 2, 1, 2, 21, 212).then(result => {
+//   console.log('total5=', result, now() - start15);
+// });
+//
+// const start3 = now();
+// await add(...Array(13).fill(1)).then(result => {
+//   const end3 = now();
+//   console.log('100.fill(1)=', result, end3 - start3);
+// });
+//
+// await add(...Array(13).fill(1)).then(result => {
+//   const end3 = now();
+//   console.log('100.fill(1).cache=', result, end3 - start3);
+// });

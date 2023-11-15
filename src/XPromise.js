@@ -163,4 +163,6 @@ export class XPromise {
       });
     });
   }
+
+  static last(promises) {}
 }

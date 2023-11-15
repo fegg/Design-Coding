@@ -7,6 +7,9 @@ export const utils = {
   isObject(obj) {
     return obj !== null && typeof obj === 'object';
   },
+  isUndefined(x) {
+    return typeof x === 'undefined';
+  },
   isFunction(fn) {
     return typeof fn === 'function';
   },

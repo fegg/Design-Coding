@@ -87,6 +87,7 @@ class MiniServerlessClient {
 
 // Serverless Gateway
 class ServerlessGateway {
+
 }
 
 // 预置云函数, deps: [AntOpenSDK]

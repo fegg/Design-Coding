@@ -12,12 +12,12 @@ function printLevel(root) {
 
    // queue 表示每一层，从根节点开始
    const queue = [root];
-   
+
    // 节点需要遍历完
    while(queue.length > 0) {
        // 先初始化每一层的数组
        // [[3], []] // 每次都初始化
-       res.push([]);
+       res.push([]); // [[]], [[第一层元素1, 第一层元素2], []]
 
        const size = queue.length;
 
@@ -35,7 +35,7 @@ function printLevel(root) {
 
            // res[2 - 1].push(nodeLeftValue1, nodeRightValue1)
            // res[2 - 1].push(nodeLeftValue2, nodeRightValue2)
-           res[res.length - 1].push(nodeValue);
+           res[res.length - 1].push(nodeValue); // res[0].push(nodeValue);
 
            // 每次都把 node 叶子字节都放进去，然后每次先 shift 出队完成
            if (node.left) {
